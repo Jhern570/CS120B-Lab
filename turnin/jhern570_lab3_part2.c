@@ -18,7 +18,10 @@ int main(void) {
     while (1) {
     	
 	unsigned char tmpC = 0x00;
-	if(PINA <= 2){
+	if(PINA == 0){
+		tmpC = 0x40;
+	}
+	else if(PINA == 1 || PINA ==  2){
 		tmpC = 0x60;
 	}
 	else if(PINA == 3 || PINA == 4){
