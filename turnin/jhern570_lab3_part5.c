@@ -33,7 +33,7 @@ int main(void) {
 	else if(((tmpD * 2) + firstB > 5) && ((tmpD* 2) + firstB < 70)){
 		tmpB = 0x04;
 	}
-	else if(((tmpD * 2) + firstB > 5) <= 5){
+	else if(((tmpD * 2) + firstB) <= 5){
 	       tmpB = 0X00;
 	}	       
 
