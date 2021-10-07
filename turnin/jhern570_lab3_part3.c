@@ -15,28 +15,36 @@ unsigned char GetBit(unsigned char x, unsigned char k){
 }
 
 int main(void) {
-    DDRA = 0x00; PORTA = 0x7F;
+    DDRA = 0x00; PORTA = 0xFF;
     DDRC = 0x00; PORTC = 0x00;
 
     while (1) {
-    	
+    	unsigned char lvl = 0x00;
+        unsigned char bit = 0x00;
+        unsigned char i;
+        for(i = 0; i < 4; i++){
+                if(GetBit(PINA,i)){
+                        bit = GetBit(PINA,i);
+                        lvl = lvl ^ bit;
+                }
+        }
 	unsigned char tmpC = 0x00;
-	if(PINA == 0){
+	if(lvl == 0){
 		tmpC = 0x04;
 	}
-	else if(PINA == 1 || PINA == 2){
+	else if(lvl == 1 || lvl == 2){
 		tmpC = 0x60;
 	}
-	else if(PINA == 3 || PINA == 4){
+	else if(lvl == 3 || lvl == 4){
 		tmpC = 0x70;
 	}
-	else if(PINA == 5 || PINA == 6){
+	else if(lvl == 5 || lvl == 6){
 		tmpC = 0x38; 
 	}
-	else if(PINA >= 7 &&PINA <= 9){
+	else if(lvl >= 7 && lvl <= 9){
 		tmpC = 0x3C;
 	}
-	else if(PINA >= 10 && PINA <= 12){
+	else if(lvl >= 10 && lvl <= 12){
 		tmpC = 0x3E;
 	}
 	else{
