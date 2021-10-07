@@ -13,7 +13,7 @@
 enum States{start, releaseOff, pressOn, releaseOn, pressOff}state;
 
 void Tick(){
-        switch(start){
+        switch(state){
                 case start:
                         state = releaseOff;
 			PORTB = 0x01;
@@ -24,13 +24,11 @@ void Tick(){
                                 state = pressOn;
                         }
                         else{
-				PORTB = 0x01;
                                 state = releaseOff;
 
                         }
                         break;
                 case pressOn:
-			PORTB = 0x02;
                         state = PINA ? pressOn : releaseOn;
                         break;
                 case releaseOn:
@@ -43,7 +41,7 @@ void Tick(){
                         }
                         break;
                 case pressOff:
-			PORTB = 0x01;
+			
                         state = PINA ? pressOff : releaseOff;
                         break;
                 default:
@@ -53,7 +51,7 @@ void Tick(){
 }
 
 int main(void) {
-    DDRA = 0xFE; PORTA = 0x01;
+    DDRA = 0x00; PORTA = 0xFF;
     DDRB = 0xFF; PORTB = 0x00;
 
     PORTB = 0x00;
