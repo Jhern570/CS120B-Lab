@@ -30,7 +30,7 @@ int main(void) {
         }
 	unsigned char tmpC = 0x00;
 	if(lvl == 0){
-		tmpC = 0x04;
+		tmpC = 0x40;
 	}
 	else if(lvl == 1 || lvl == 2){
 		tmpC = 0x60;
