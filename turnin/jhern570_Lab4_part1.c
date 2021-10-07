@@ -28,6 +28,7 @@ void Tick(){
                         }
                         break;
                 case pressOn:
+			PORTB = 0x02;
                         state = PINA ? pressOn : releaseOn;
                         break;
                 case releaseOn:
@@ -35,11 +36,12 @@ void Tick(){
                                 state = releaseOn;
                         }
                         else{
-                                PORTB = 0X01;
+                                PORTB = 0x01;
                                 state = pressOff;
                         }
                         break;
                 case pressOff:
+			PORTB = 0x01;
                         state = PINA ? pressOff : releaseOff;
                         break;
                 default:
