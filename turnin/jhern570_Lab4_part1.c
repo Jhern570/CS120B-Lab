@@ -16,6 +16,7 @@ void Tick(){
         switch(start){
                 case start:
                         state = releaseOff;
+			PORTB = 0x01;
                         break;
                 case releaseOff:
                         if(PINA){
