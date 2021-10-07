@@ -27,9 +27,9 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # W = 0
-test "PINA: 0x00, PINB: 0x00 => PORTB: 0x00"
+test "PIND: 0x00, PINB: 0x00 => PORTB: 0x00"
 # Set inputs
-setPINA 0x00
+setPIND 0x00
 setPINB 0x00
 # Continue for several ticks
 continue 5
@@ -41,9 +41,9 @@ checkResult
 # Add tests below
 
 # w = 1
-test "PINA: 0x00, PINB: 0x01 => PORTB: 0x00"
+test "PIND: 0x00, PINB: 0x01 => PORTB: 0x00"
 # Set inputs
-setPINA 0x00
+setPIND 0x00
 setPINB 0x01
 # Continue for several ticks
 continue 5
@@ -53,9 +53,9 @@ expectPORTB 0x00
 checkResult
 
 # W = 3 
-test "PINA: 0x01, PINB: 0x01 => PORTB: 0x00"
+test "PIND: 0x01, PINB: 0x01 => PORTB: 0x00"
 # Set inputs
-setPINA 0x01
+setPIND 0x01
 setPINB 0x01
 # Continue for several ticks
 continue 5
@@ -65,9 +65,9 @@ expectPORTB 0x00
 checkResult
 
 # W = 5
-test "PINA: 0x02, PINB: 0x01 => PORTB: 0x00"
+test "PIND: 0x02, PINB: 0x01 => PORTB: 0x00"
 # Set inputs
-setPINA 0x02
+setPIND 0x02
 setPINB 0x01
 # Continue for several ticks
 continue 5
@@ -77,9 +77,9 @@ expectPORTB 0x00
 checkResult
 
 # W = 6
-test "PINA: 0x03, PINB: 0x00 => PORTB: 0x04"
+test "PIND: 0x03, PINB: 0x00 => PORTB: 0x04"
 # Set inputs
-setPINA 0x06
+setPIND 0x06
 setPINB 0x00
 # Continue for several ticks
 continue 5
@@ -89,9 +89,9 @@ expectPORTB 0x04
 checkResult
 
 # W = 69
-test "PINA: 0x22, PINB: 0x01 => PORTB: 0x04"
+test "PIND: 0x22, PINB: 0x01 => PORTB: 0x04"
 # Set inputs
-setPINA 0x22
+setPIND 0x22
 setPINB 0x01
 # Continue for several ticks
 continue 5
@@ -101,9 +101,9 @@ expectPORTB 0x04
 checkResult
 
 # W = 70
-test "PINA: 0x23, PINB: 0x00 => PORTB: 0x02"
+test "PIND: 0x23, PINB: 0x00 => PORTB: 0x02"
 # Set inputs
-setPINA 0x23
+setPIND 0x23
 setPINB 0x00
 # Continue for several ticks
 continue 5
@@ -113,9 +113,9 @@ expectPORTB 0x02
 checkResult
 
 # W = 510
-test "PINA: 0xFF, PINB: 0x00 => PORTB: 0x02"
+test "PIND: 0xFF, PINB: 0x00 => PORTB: 0x02"
 # Set inputs
-setPINA 0xFF
+setPIND 0xFF
 setPINB 0x01
 # Continue for several ticks
 continue 5
@@ -125,9 +125,9 @@ expectPORTB 0x02
 checkResult
 
 # W = 511
-test "PINA: 0xFF, PINB: 0x01 => PORTB: 0x02"
+test "PIND: 0xFF, PINB: 0x01 => PORTB: 0x02"
 # Set inputs
-setPINA 0xFF
+setPIND 0xFF
 setPINB 0x01
 # Continue for several ticks
 continue 5

@@ -24,10 +24,10 @@ int main(void) {
     unsigned char tmpB = 0X00;
     while (1) {
 
-	tmpD = PINA;
+	tmpD = PIND;
 	firstB = GetBit(PINB,0);
 
-	if((tmpD * 2) + firstB >= 70){
+	if(((tmpD * 2) + firstB) >= 70){
 		tmpB = 0x02;
 	}
 	else if(((tmpD * 2) + firstB > 5) && ((tmpD* 2) + firstB < 70)){
