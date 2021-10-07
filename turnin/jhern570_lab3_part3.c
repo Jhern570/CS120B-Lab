@@ -15,7 +15,7 @@ unsigned char GetBit(unsigned char x, unsigned char k){
 }
 
 int main(void) {
-    DDRA = 0x10; PORTA = 0x7F;
+    DDRA = 0x00; PORTA = 0x7F;
     DDRC = 0x00; PORTC = 0x00;
 
     while (1) {
