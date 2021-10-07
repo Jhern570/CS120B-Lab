@@ -33,7 +33,7 @@ setPINA 0x00
 # Continue for several ticks
 continue 5
 # Set expect values
-expectPORTC 0x60
+expectPORTC 0x40
 # Check pass/fail
 checkResult
 

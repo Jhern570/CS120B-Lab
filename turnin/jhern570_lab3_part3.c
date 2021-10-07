@@ -15,13 +15,16 @@ unsigned char GetBit(unsigned char x, unsigned char k){
 }
 
 int main(void) {
-    DDRA = 0x00; PORTA = 0x7F;
+    DDRA = 0x10; PORTA = 0x7F;
     DDRC = 0x00; PORTC = 0x00;
 
     while (1) {
     	
 	unsigned char tmpC = 0x00;
-	if(PINA <= 2){
+	if(PINA == 0){
+		tmpC = 0x04;
+	}
+	else if(PINA == 1 || PINA == 2){
 		tmpC = 0x60;
 	}
 	else if(PINA == 3 || PINA == 4){
