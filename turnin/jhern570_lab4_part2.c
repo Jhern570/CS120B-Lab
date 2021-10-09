@@ -1,6 +1,6 @@
 /*	Author: Julio Hernandez 
  *	Lab Section: 023
- *	Assignment: Lab #3  Exercise # 5
+ *	Assignment: Lab #4  Exercise # 2
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
@@ -13,7 +13,6 @@
 enum States{start, waitPress, pressA0, pressA1,pressBoth}state;
 unsigned char tmpC = 0x00;
 void Tick(){
-	unsigned char tmpC = 0x00;
         switch(state){
               case start:
 

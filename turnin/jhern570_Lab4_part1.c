@@ -13,7 +13,6 @@
 enum States{start, releaseOff, pressOn, releaseOn, pressOff}state;
 void Tick(){
         switch(state){
-		switch(state){
                 case start:
                         state = releaseOff;
 			PORTB = 0x01;
