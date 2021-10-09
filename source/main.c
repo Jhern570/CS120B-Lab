@@ -1,6 +1,6 @@
 /*	Author: Julio Hernandez 
  *	Lab Section: 023
- *	Assignment: Lab #2  Exercise # challenge
+ *	Assignment: Lab #3  Exercise # 5
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
@@ -10,71 +10,115 @@
 #include "../header/simAVRHeader.h"
 #endif
 
+enum States{start, waitPress, pressA0, pressA1,pressBoth}state;
+unsigned char tmpC = 0x00;
+void Tick(){
+       
+        switch(state){
+                case start:
+                   	
+			tmpC = 7;
+			PORTC = tmpC;
+			state = waitPress;
+			break;
+		case waitPress:
+			if(PINA == 1){
+				if(tmpC != 9){
+					tmpC++;
+					
+					PORTC = tmpC;
+				}
+				state = pressA0;
+			}
+			else if(PINA == 2){
+				if(tmpC != 0){
+					tmpC--;
+					PORTC = tmpC;
+				}
+				state = pressA1;
+			}
+			else if(PINA == 3){
+				tmpC = 0x00;
+				PORTC = tmpC;
+				state = pressBoth;
+			}
+			else if(PINA == 0){
+				state = waitPress;
+			}
+			break;
+                case pressBoth:
+			if(PINA == 3){
+				state = pressBoth;
+			}
+			else if(PINA == 1){
+				tmpC++;
+				PORTC = tmpC;
+				state = pressA0;
+                        }
+                        else if(PINA == 2){
+                                state = pressA1;
+                        }
+                        else if(PINA == 0){
+				state = waitPress;
+                        }
+			break;
+                case pressA0:
+			if(PINA == 0x01){
+				state = pressA0;
 
-unsigned char CheckBit(unsigned short x){
-	if(x & 0x0200){
-		return 9;
-	}
-	else if(x & 0x0100){
-		return 8;
-	}
-	return 7;
-		
+			}
+			else if(PINA == 2){
+                                tmpC--;
+                                PORTC = tmpC;
+                                state = pressA1;
+                        }
+
+			else if (PINA == 3){
+				tmpC = 0x00;
+				PORTC = tmpC;
+				state = pressBoth;
+			}
+			else if(PINA == 0){
+				state = waitPress;
+			}
+                        break;
+                case pressA1:
+                        if(PINA == 2){
+                                
+				state = pressA1;
+                                
+                        }
+			else if(PINA == 1){
+				tmpC++;
+				PORTC = tmpC;
+				state = pressA0;
+                               
+                        }
+                        else if(PINA == 3){
+				tmpC = 0x00;
+				PORTC = tmpC;
+                                state = pressBoth;
+                        }
+			else if(PINA == 0){
+				state = waitPress;
+			}
+                        break;
+                default:
+                        state = start;
+                        break;
+      }
 }
 
 int main(void) {
     DDRA = 0x00; PORTA = 0xFF;
-    DDRB = 0x00; PORTB = 0xFF;
-    DDRC = 0x00; PORTC = 0xFF;
-    DDRD = 0xFF; PORTD = 0x00;
+    DDRC = 0xFF; PORTC = 0x00;
 
-    unsigned char tmpA = 0X00;
-    unsigned char tmpB = 0x00;
-    unsigned char tmpC = 0x00;
-    unsigned char tmpD = 0x00;
-    unsigned short totalWeight = 0x0000; 
-    
-
-    while (1){
-	
-	tmpA = PINA;
-	tmpB = PINB;
-	tmpC = PIND;
-	totalWeight = tmpA + tmpB + tmpC;
-	
-	if(totalWeight > 140){
-		tmpD = 0x01;
-	}
-	
-	if(tmpA > tmpC){
-		if((tmpA - tmpC) > 80){
-			tmpD = tmpD ^ 0x02;
-		}
-	}
-	else if(tmpC > tmpA){
-		if((tmpC - tmpA) > 80){
-			tmpD = tmpD ^ 0x02;
-		}
-	
-	}
-	if(CheckBit(totalWeight) == 9){
-		totalWeight = totalWeight >> 2;
-		totalWeight = totalWeight & 0x00FC;
-		tmpD = tmpD | totalWeight;
-			
-	}
-	else if(CheckBit(totalWeight) == 8){
-		tmpD = ((totalWeight >> 1) & 0x00FC) | tmpD;
-	}
-	else{
-		tmpD = (totalWeight & 0X00FC) | tmpD;
-		
-	}
-
-	PORTD = tmpD;
-	
-
-
+    PORTC = 0x00;
+    state = start;
+    while (1) {
+        Tick();
     }
+
     return 1;
 }
+

@@ -36,7 +36,7 @@ int main(void) {
 		PORTC = cntavail ^ 0x80;
 	}
 	else{
-		PORTC = cntavail;
+		PORTC = 4 - cntavail;
 	}
 
     }

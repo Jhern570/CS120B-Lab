@@ -32,7 +32,7 @@ int main(void) {
 		}
 	}
 	
-	PORTC = cntavail;
+	PORTC = 4 - cntavail;
 
     }
     return 1;
