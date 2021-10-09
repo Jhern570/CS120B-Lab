@@ -31,7 +31,7 @@ test "PINA: 0x01 => PORTC: 0x08, state: pressA0"
 # Set inputs
 setPINA 0x01
 # Continue for several ticks
-continue 2
+continue 10
 # Set expect values
 expectPORTC 0x08
 expect state pressA0
@@ -42,54 +42,65 @@ test "PINA: 0x02 => PORTC: 0x06, state: pressA1"
 # Set inputs
 setPINA 0x02
 # Continue for several ticks
-continue 2
+continue 5
 # Set expect values
 expectPORTC 0x06
 expect state pressA1
 # Check pass/fail
 checkResult
 
-test "PINA: 0x00 => PORTC: 0x00, state: depress"
+test "PINA: 0x00 => PORTC: 0x07, state: waitPress"
 # Set inputs
 setPINA 0x00
+continue 5
 # Set expect values
-expectPORTC 0x00
-expect state depress
+expectPORTC 0x07
+expect state waitPress
 # Check pass/fail
 checkResult
 
-test "PINA: 0x00, 0x01, 0x00, 0x02 => PORTC: 0x00, state: pressA1"
+test "PINA: 0x03 => PORTC: 0x00, state: pressBoth"
 # Set inputs
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x02
-continue 2
+setPINA 0x03
+continue 5
 # Set expect values
 expectPORTC 0x00
+expect state pressBoth
+# Check pass/fail
+checkResult
+
+
+test "PINA: 0x00, 0x01, 0x00, 0x02 => PORTC: 0x07, state: pressA1"
+# Set inputs
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x02
+continue 5
+# Set expect values
+expectPORTC 0x07
 expect state pressA1
 # Check pass/fail
 checkResult
 
-test "PINA: 0x00, 0x02, 0x00, 0x01 => PORTC: 0x09, state: pressA0"
+test "PINA: 0x00, 0x02, 0x00, 0x01 => PORTC: 0x07, state: pressA0"
 # Set inputs
 setPINA 0x00
-continue 2
+continue 5
 setPINA 0x02
-continue 2
+continue 5
 setPINA 0x00
-continue 2
+continue 5
 setPINA 0x01
-continue 2
+continue 5
 # Set expect values
-expectPORTC 0x09
+expectPORTC 0x07
 expect state pressA0
 # Check pass/fail
 checkResult
-
 
 
 # Report on how many tests passed/tests ran

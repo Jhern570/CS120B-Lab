@@ -10,59 +10,97 @@
 #include "../header/simAVRHeader.h"
 #endif
 
-enum States{start, depress, pressA0, pressA1}state;
-
+enum States{start, waitPress, pressA0, pressA1,pressBoth}state;
+unsigned char tmpC = 0x00;
 void Tick(){
 	unsigned char tmpC = 0x00;
         switch(state){
-                case start:
-                        state = depress;
-			tmpC = 0x07;
-			PORTC = tmpC;
-						
+              case start:
+
+                        tmpC = 7;
+                        PORTC = tmpC;
+                        state = waitPress;
                         break;
-                case depress:
-			if(PINA == 0x01){
-				tmpC++;
-				PORTC = tmpC;
-				state = pressA0;
-			}
-			else if(PINA == 0x02){
-				tmpC--;
-				PORTC = tmpC;
-				state = pressA1;
-			}
-			else{
-				PORTC = 0x00;
-				state = depress;
-			}
-			break;
+                case waitPress:
+                        if(PINA == 1){
+                                if(tmpC != 9){
+                                        tmpC++;
+
+                                        PORTC = tmpC;
+                                }
+                                state = pressA0;
+                        }
+                        else if(PINA == 2){
+                                if(tmpC != 0){
+                                        tmpC--;
+                                        PORTC = tmpC;
+                                }
+                                state = pressA1;
+                        }
+                        else if(PINA == 3){
+                                tmpC = 0x00;
+                                PORTC = tmpC;
+                                state = pressBoth;
+                        }
+                        else if(PINA == 0){
+                                state = waitPress;
+                        }
+                        break;
+                case pressBoth:
+			if(PINA == 3){
+                                state = pressBoth;
+                        }
+                        else if(PINA == 1){
+                                tmpC++;
+                                PORTC = tmpC;
+                                state = pressA0;
+                        }
+                        else if(PINA == 2){
+                                state = pressA1;
+                        }
+                        else if(PINA == 0){
+                                state = waitPress;
+                        }
+                        break;
                 case pressA0:
-			if(PINA){
-				if(tmpC != 0x09){
-					tmpC++;
-					PORTC = tmpC;
-					state = pressA0;
-				}
+                        if(PINA == 0x01){
+                                state = pressA0;
 
-			}
-			else{
-				state = depress;
-			}
+                        }
+                        else if(PINA == 2){
+                                tmpC--;
+                                PORTC = tmpC;
+                                state = pressA1;
+                        }
 
+                        else if (PINA == 3){
+                                tmpC = 0x00;
+                                PORTC = tmpC;
+                                state = pressBoth;
+                        }
+                        else if(PINA == 0){
+                                state = waitPress;
+                        }
                         break;
                 case pressA1:
-                        if(PINA == 0x02){
-                                if(tmpC != 0x00){
-                                        tmpC++;
-                                        PORTC = tmpC;
-                                       
-                                }
-				state = pressA1;
-                                
+			if(PINA == 2){
+
+                                state = pressA1;
+
                         }
-                        else{
-                                state = depress;
+                        else if(PINA == 1){
+                                tmpC++;
+                                PORTC = tmpC;
+                                state = pressA0;
+
+                        }
+                        else if(PINA == 3){
+                                tmpC = 0x00;
+                                PORTC = tmpC;
+                                state = pressBoth;
+                        }
+                        else if(PINA == 0){
+                                state = waitPress;
                         }
                         break;
                 default:
