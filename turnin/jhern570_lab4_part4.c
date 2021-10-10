@@ -73,7 +73,7 @@ void Tick(){
 			else if(PINA == 0 && PINB == 1){
 				state = unlock;
 			}
-			else if(PINA == 0 && PINB != 1){
+			else if(PINA == 0 && PINB == 0){
 				state = reset;
 			}
 				
