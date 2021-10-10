@@ -87,7 +87,7 @@ void Tick(){
 				PORTC = unlock;
 				state = unlock;
 			}
-			else if(PINA != 8 && PINA == 0){
+			else if(PINA != 8 && PINA != 0){
 				state = firstPress;
 			}
 			break;	
