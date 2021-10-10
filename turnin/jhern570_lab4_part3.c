@@ -54,7 +54,7 @@ void Tick(){
 				PORTC = pressX;
 				state = pressX;
 			}
-			else{
+			else if(PINA == 0){
 				state = waitPress;
 			}
 			break;
@@ -63,7 +63,7 @@ void Tick(){
 				PORTC = pressY;
 				state = pressY;
 			}
-			else{
+			else if(PINA == 0){
 				state = waitPress;
 			}
                         break;
@@ -73,7 +73,7 @@ void Tick(){
 				state = pressP;
                                 
                         }
-			else{
+			else if(PINA == 0){
 				state = waitPress;
 			}
                         break;
@@ -92,7 +92,7 @@ void Tick(){
 				PORTC = pressI;
 				state = pressI;
 			}
-			else{
+			else if(PINA == 0){
 				state = waitPress;
 			}
 			break;
