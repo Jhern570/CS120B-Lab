@@ -51,7 +51,7 @@ int main(void) {
 	
 	}
 	
-	shiftWt = CheckBit(totalWeigth);
+	shiftWt = CheckBit(totalWeight);
 	tmpD = tmpD | shiftWt;
 	 
 
