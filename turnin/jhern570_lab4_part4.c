@@ -59,6 +59,7 @@ void Tick(){
                         }
 			else if(PINA == 2 && password == 1 && PINB == 1){
 				PORTB = 0x00;
+				password = 0;
 			}	
 			else if(PINA != 2 && password == 1){
 				password = 0;
