@@ -33,7 +33,7 @@ int main(void) {
 	}
 	
 	if(cntavail == 4){
-		PORTC = cntavail ^ 0x80;
+		PORTC = 0x00 ^ 0x80;
 	}
 	else{
 		PORTC = 4 - cntavail;
