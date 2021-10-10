@@ -12,14 +12,7 @@
 
 
 unsigned char CheckBit(unsigned short x){
-	if(x & 0x0200){
-		return 9;
-	}
-	else if(x & 0x0100){
-		return 8;
-	}
-	return 7;
-		
+	return (x >> 2);
 }
 
 int main(void) {
@@ -33,7 +26,7 @@ int main(void) {
     unsigned char tmpC = 0x00;
     unsigned char tmpD = 0x00;
     unsigned short totalWeight = 0x0000; 
-    
+    unsigned char shiftWt = 0x00;
 
     while (1){
 	
@@ -57,19 +50,10 @@ int main(void) {
 		}
 	
 	}
-	if(CheckBit(totalWeight) == 9){
-		totalWeight = totalWeight >> 2;
-		totalWeight = totalWeight & 0x00FC;
-		tmpD = tmpD | totalWeight;
-			
-	}
-	else if(CheckBit(totalWeight) == 8){
-		tmpD = ((totalWeight >> 1) & 0x00FC) | tmpD;
-	}
-	else{
-		tmpD = (totalWeight & 0X00FC) | tmpD;
-		
-	}
+	
+	shiftWt = CheckBit(totalWeigth);
+	tmpD = tmpD | shiftWt;
+	 
 
 	PORTD = tmpD;
 	
