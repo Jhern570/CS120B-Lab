@@ -27,80 +27,83 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # Example test:
-test "PINA: 0x01 => PORTB: 0x00, PORTC: pressX"
+test "PINA: 0x01 => PORTB: 0x00, PORTC: firstPress"
 # Set inputs
 setPINA 0x01
 # Continue for several ticks
 continue 5
 # Set expect values
 expectPORTB 0x00
-expectPORTC  pressX
+expectPORTC  firstPress
 # Check pass/fail
 checkResult
 
-test "PINA: 0x02 => PORTB: 0x00, PORTC: pressY"
+test "PINA: 0x02 => PORTB: 0x00, PORTC: firstPress"
 # Set inputs
+continue 5
 setPINA 0x02
 # Continue for several ticks
 continue 5
 # Set expect values
 expectPORTB 0x00
-expectPORTC pressY
+expectPORTC firstPress
 # Check pass/fail
 checkResult
 
-test "PINA: 0x04 => PORTB: 0x00, PORTC: pressP"
+test "PINA: 0x04 => PORTB: 0x00, PORTC: firstPress"
 # Set inputs
 setPINA 0x04
 # Continue for several ticks
 continue 5
-continue 5
 # Set expect values
 expectPORTB 0x00
-expectPORTC pressP
+expectPORTC firstPress
 # Check pass/fail
 checkResult
 
-
-test "PINA: 0x00 => PORTB: 0x00, PORTC: waitPress"
+test "PINA: 0x00 => PORTB: 0x00, PORTC: reset"
 # Set inputs
 setPINA 0x00
 continue 5
 # Set expect values
-expectPORTC 0x00
-expect state waitPress
+expectPORTB 0x00
+expectPORTC reset
 # Check pass/fail
 checkResult
 
-test "PINA: 0x08 => PORTB: 0x00, PORTC: waitPress"
+test "PINA: 0x08 => PORTB: 0x00, PORTC: reset"
 # Set inputs
 setPINA 0x08
 continue 5
 # Set expect values
 expectPORTB 0x00
-expectPORTC waitPress
+expectPORTC reset
 # Check pass/fail
 checkResult
 
-test "PINA: 0x04, 0x02 => PORTB: 0x01, PORTC = unlock"
+test "PINA: 0x04, 0x00,  0x02 => PORTB: 0x01, PORTC = secondPress"
 # Set inputs
-setPINA 0x00
-continue 2
 setPINA 0x04
-continue 2
+continue 5
+setPINA 0x00
+continue 5
 setPINA 0x02
-continue 2
+continue 5
 # Set expect values
 expectPORTB 0x01
-expectPORTC unlock
+expectPORTC secondPress
 # Check pass/fail
 checkResult
 
-test "PINA: 0x04, 0x02, 0x08 => PORTB: 0x00, state: pressI"
+test "PINA: 0x04, 0x00, 0x02, 0x00, 0x08 => PORTB: 0x00, state: pressI"
 # Set inputs
 setPINA 0x04
 continue 2
+setPINA 0x00
+continue 2
 setPINA 0x02
+continue 2
+setPINA 0x00
 continue 2
 setPINA 0x08
 continue 2

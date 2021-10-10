@@ -11,92 +11,87 @@
 #endif
 
 // x = A0, y = A1, # = A2
-enum States{start, waitPress, pressX, pressY, pressP, unlock, pressI}state;
+enum States{start, reset, firstPress, releaseFirst, secondPress, unlock, pressI}state;
 unsigned char password  = 0x00;
 void Tick(){
        
         switch(state){
-                case start:
-			state = waitPress;
-			break;
-		case waitPress:
-			if(PINA == 4){
-				if(password == 1){
-					password = 0x00;
-				}
-				else{
-					password++;
-				}
-				state = pressP;		
-			}
-			else if(PINA == 2){
-				if(password == 1){
-					PORTB = 0x01;
-					password = 0x00;
-					state = unlock;
-				}
-				state = pressY;
-				
-			}
-			else if(PINA == 1){
-				if(password == 1){
-					password = 0x00;
-				}
-				state = pressX;
-			}
-			else{
-				PORTC = waitPress;
-				state = waitPress;
-			}
-			break;
-                case pressX:
-			if(PINA == 1){
-				PORTC = pressX;
-				state = pressX;
-			}
-			else if(PINA == 0){
-				state = waitPress;
-			}
-			break;
-                case pressY:
-			if(PINA == 2){
-				PORTC = pressY;
-				state = pressY;
-			}
-			else if(PINA == 0){
-				state = waitPress;
-			}
+		case start:
+                        state = reset;
                         break;
-                case pressP:
-                        if(PINA == 2){
-                                PORTC = pressP;
-				state = pressP;
-                                
+                case reset:
+                        if(PINA){
+                                state = firstPress;
                         }
-			else if(PINA == 0){
-				state = waitPress;
-			}
+
+                        else{
+                                PORTC = reset;
+                                state = reset;
+                        }
                         break;
-		case unlock: 
-			if(PINA == 8){
-				PORTB = 0x00;
-				state = pressI;
-			}
-			else{
-				PORTC = unlock;
-				state = unlock;
-			}
-			break;	
-		case pressI: 
-			if(PINA == 8){
-				PORTC = pressI;
-				state = pressI;
-			}
-			else if(PINA == 0){
-				state = waitPress;
-			}
-			break;
-                default:
+                case firstPress:
+                        if(PINA == 4){
+                                password = 0x01;
+                        }
+                        else if(PINA == 0){
+                                state = releaseFirst;
+                        }
+                        else{
+                                PORTC = firstPress;
+                                state =  firstPress;
+                        }
+                        break;
+                case releaseFirst:
+                        if(PINA){
+                                state = secondPress;
+                        }
+                        else if(PINA == 0){
+                                PORTC = releaseFirst;
+                                state = releaseFirst;
+                        }
+                        break;
+		case secondPress:
+                        if(PINA == 2 && password == 1){
+                                PORTB = 0x01;
+                                password = 0;
+
+                        }
+                        else if(PINA != 2 && password == 1){
+                                password = 0;
+                        }
+
+                        if(PINA){
+                                PORTC = secondPress;
+                                state = secondPress;
+                        }
+                        else if(PINA == 0 && PINB == 1){
+                                state = unlock;
+                        }
+                        else if(PINA == 0 && PINB != 1){
+                                state = reset;
+                        }
+
+                        break;
+                case unlock:
+                        if(PINA == 8){
+                                PORTB = 0x00;
+                                state = pressI;
+                        }
+                        else{
+                                PORTC = unlock;
+                                state = unlock;
+                        }
+                        break;
+                case pressI:
+                        if(PINA == 8){
+                                PORTC = pressI;
+                                state = pressI;
+                        }
+                        else if(PINA == 0){
+                                state = reset;
+                        }
+                        break;
+		default:
                         state = start;
                         break;
       }
