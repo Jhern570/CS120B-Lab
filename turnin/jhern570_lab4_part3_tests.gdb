@@ -26,6 +26,16 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
+test "PINA: 0x00 => PORTB: 0x00, PORTC: reset"
+# Set inputs
+setPINA 0x00
+continue 5
+# Set expect values
+expectPORTB 0x00
+expectPORTC reset
+# Check pass/fail
+checkResult
+
 # Example test:
 test "PINA: 0x01 => PORTB: 0x00, PORTC: firstPress"
 # Set inputs
@@ -61,23 +71,13 @@ expectPORTC firstPress
 # Check pass/fail
 checkResult
 
-test "PINA: 0x00 => PORTB: 0x00, PORTC: reset"
-# Set inputs
-setPINA 0x00
-continue 5
-# Set expect values
-expectPORTB 0x00
-expectPORTC reset
-# Check pass/fail
-checkResult
-
-test "PINA: 0x08 => PORTB: 0x00, PORTC: reset"
+test "PINA: 0x08 => PORTB: 0x00, PORTC: firstPress"
 # Set inputs
 setPINA 0x08
-continue 5
+continue 2
 # Set expect values
 expectPORTB 0x00
-expectPORTC reset
+expectPORTC firstPress
 # Check pass/fail
 checkResult
 
@@ -112,7 +112,6 @@ expectPORTB 0x00
 expectPORTC pressI
 # Check pass/fail
 checkResult
-
 
 
 # Report on how many tests passed/tests ran
