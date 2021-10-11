@@ -16,11 +16,11 @@ enum Statew{start, reset, press, release,unlock, pressI}state;
 unsigned char password  = 0x00;
 unsigned char sequence[4];
 unsigned char position = 0x00;
-unsignec char pressed = 0x00;
+unsigned char pressed = 0x00;
 sequence[0] = 4;
 sequence[1] = 1;
 sequence[2] = 2;
-sequence[1] = 1;
+sequence[3] = 1;
 void Tick(){
        
         switch(state){
@@ -45,7 +45,7 @@ void Tick(){
 			}
 			else if(PINA != sequence[position] && pressed == 0){
 				position = position + 1;
-				pressed = 1
+				pressed = 1;
 			}
 			
 			if(PINA == 0){
