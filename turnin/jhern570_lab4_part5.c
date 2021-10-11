@@ -14,13 +14,9 @@
 //enum States{start, reset, firstPress, releaseFirst, secondPress, unlock, pressI,lock}state;
 enum Statew{start, reset, press, release,unlock, pressI}state;
 unsigned char password  = 0x00;
-unsigned char sequence[4];
+unsigned char sequence[] = {4,1,2,1};
 unsigned char position = 0x00;
 unsigned char pressed = 0x00;
-sequence[0] = 4;
-sequence[1] = 1;
-sequence[2] = 2;
-sequence[3] = 1;
 void Tick(){
        
         switch(state){
