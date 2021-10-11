@@ -36,7 +36,7 @@ void Tick(){
                                 password = 0x01;
                         }
 
-			if(PINA){
+			if(PINA > 0){
 				PORTC = firstPress;
                                 state =  firstPress;
 
@@ -47,10 +47,6 @@ void Tick(){
                         break;
                 case releaseFirst:
                         if(PINA){
-				/*if(PINA == 2 && password == 1){
-					PORTB = 1;
-					password = 0;
-				}*/
                                 state = secondPress;
                         }
                         else if(PINA == 0){
@@ -60,25 +56,27 @@ void Tick(){
                         break;
                 case secondPress:
 			if(PINA == 2 && password == 1){
-				//PORTB = 0x01;
+				PORTB = 0x01;
                                 password = 0;
                         }
-                       /* if(PINA != 2 && password == 1){
+			else if(PINA != 2 && password == 1){
                                 password = 0;
-                        }*/
+                        }
 
-                        if(PINA){
+                        if(PINA < 8 && PINA != 0){
                                 PORTC = secondPress;
                                 state = secondPress;
                         }
-                        else if(PINA == 0 && password == 0){
+                        else if(PINA == 0 && PORTB == 0x01){
 				PORTB = 0x01;
                                 state = unlock;
                         }
-                        else if(PINA == 0 && password == 1){
-				password = 0;
+                        else if(PINA == 0 && PORTB = 0x00){
                                 state = reset;
                         }
+			else if(PINA == 8){
+				state = pressI;
+			}
 
                         break;
                 case unlock:
