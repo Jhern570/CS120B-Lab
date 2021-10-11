@@ -20,7 +20,7 @@ void Tick(){
                         state = reset;
                         break;
                 case reset:
-			if(PINA < 8 && A != 0){
+			if(PINA < 8 && PINA != 0){
                                 state = firstPress;
                         }
 			else if(PINA == 8){
