@@ -57,18 +57,19 @@ void Tick(){
                                 password = 0;
 
                         }
-                        else if(PINA != 2 && password == 1){
+                        /*else if(PINA != 2 && password == 1){
                                 password = 0;
-                        }
+                        }*/
 
                         if(PINA){
                                 PORTC = secondPress;
                                 state = secondPress;
                         }
-                        else if(PINA == 0 && PINB == 1){
+                        else if(PINA == 0 && password == 0){
                                 state = unlock;
                         }
-                        else if(PINA == 0 && PINB != 1){
+                        else if(PINA == 0 && password != 0){
+				password = 0;
                                 state = reset;
                         }
 
