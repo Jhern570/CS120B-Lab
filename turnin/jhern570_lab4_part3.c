@@ -60,7 +60,7 @@ void Tick(){
                                 password = 0;
 
                         }
-                        delse if(PINA != 2 && password == 1){
+                        else if(PINA != 2 && password == 1){
                                 password = 0;
                         }
 
