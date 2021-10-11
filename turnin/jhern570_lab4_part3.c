@@ -20,10 +20,12 @@ void Tick(){
                         state = reset;
                         break;
                 case reset:
-                        if(PINA){
+			if(PINA < 8 && A != 0){
                                 state = firstPress;
                         }
-
+			else if(PINA == 8){
+				state = pressI;
+			}
                         else if(PINA == 0){
                                 PORTC = reset;
                                 state = reset;
