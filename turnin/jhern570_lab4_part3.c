@@ -71,7 +71,7 @@ void Tick(){
 				PORTB = 0x01;
                                 state = unlock;
                         }
-                        else if(PINA == 0 && PORTB = 0x00){
+                        else if(PINA == 0 && PORTB == 0x00){
                                 state = reset;
                         }
 			else if(PINA == 8){
