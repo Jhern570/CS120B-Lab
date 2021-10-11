@@ -44,15 +44,15 @@ int main(void) {
 			tmpD = tmpD ^ 0x02;
 		}
 	}
-	else if(tmpC > tmpA){
+	/*else if(tmpC > tmpA){
 		if((tmpC - tmpA) > 80){
 			tmpD = tmpD ^ 0x02;
 		}
 	
-	}
+	}*/
 	
 	shiftWt = CheckBit(totalWeight);
-	tmpD = tmpD | shiftWt;
+	tmpD = tmpD ^ shiftWt;
 	 
 
 	PORTD = tmpD;
