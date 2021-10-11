@@ -47,6 +47,10 @@ void Tick(){
                         break;
                 case releaseFirst:
                         if(PINA){
+				if(PINA == 2 && password == 1){
+					PORTB = 1;
+					password = 0;
+				}
                                 state = secondPress;
                         }
                         else if(PINA == 0){
@@ -55,12 +59,12 @@ void Tick(){
                         }
                         break;
                 case secondPress:
-			if(PINA == 2 && password == 1){
+			/*if(PINA == 2 && password == 1){
 				PORTB = 1;
                                 password = 0;
 
-                        }
-                        else if(PINA != 2 && password == 1){
+                        }*/
+                        if(PINA != 2 && password == 1){
                                 password = 0;
                         }
 
