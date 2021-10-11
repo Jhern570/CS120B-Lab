@@ -12,7 +12,7 @@
 
 // x = A0, y = A1, # = A2
 //enum States{start, reset, firstPress, releaseFirst, secondPress, unlock, pressI,lock}state;
-enum Statew{start, reset, press, release,unlock, pressI}state;
+enum States{start, reset, press, release,unlock, pressI}state;
 unsigned char password  = 0x00;
 unsigned char sequence[] = {4,1,2,1};
 unsigned char position = 0x00;
@@ -38,6 +38,12 @@ void Tick(){
 				password = password + 1;
 				position = position + 1;
 				pressed = 1;
+				if(password == 4 && PINB == 0){
+					PORTB = 0x01;
+				}
+				else if(password == 4 && PINB == 1){
+					PORTB = 0x00;
+				}
 			}
 			else if(PINA != sequence[position] && pressed == 0){
 				position = position + 1;
@@ -67,7 +73,6 @@ void Tick(){
 				state = reset;
 			}
 			else if(PINA == 0 && position == 4 && password == 4){
-				PORTB = 0x01;
 				position = 0;
 				password = 0;
 				state = unlock;
