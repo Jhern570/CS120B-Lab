@@ -12,7 +12,7 @@
 
 
 unsigned char CheckBit(unsigned short x){
-	return (unsigned char(x) >> 2);
+	return (x >> 2);
 }
 
 int main(void) {
