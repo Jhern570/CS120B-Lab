@@ -13,7 +13,7 @@
 
 int main(void) {
 
-    DDRA = 0xF0; PORTA = 0x0F;
+    DDRA = 0x00; PORTA = 0x0F;
     DDRC = 0xFF; PORTC = 0x00;
 
     while (1) {
