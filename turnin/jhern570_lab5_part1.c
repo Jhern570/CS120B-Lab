@@ -20,6 +20,7 @@ int main(void) {
     	
 	unsigned char tmpC = 0x00;
 	unsigned char button = ~PINA;
+	button = button & 0x04;
 	if(button == 0){
 		tmpC = 0x40;
 	}
