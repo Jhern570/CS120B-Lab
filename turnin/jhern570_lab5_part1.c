@@ -20,7 +20,7 @@ int main(void) {
     	
 	unsigned char button = ~PINA;
 	if(button == 0){
-		tmpC = 0x40;
+		PORTC = 0x40;
 	}
 	else if(button == 1 || button ==  2){
 		PORTC = 0x60;
