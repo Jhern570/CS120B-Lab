@@ -18,7 +18,7 @@ int main(void) {
 
     while (1) {
     	
-	unsigned char button = ~PINA;
+	unsigned char button = ~(PINA);
 	if(button == 0){
 		PORTC = 0x40;
 	}
