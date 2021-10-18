@@ -13,36 +13,33 @@
 
 int main(void) {
 
-    DDRA = 0xF0; PORTA = 0x0F;
-    DDRC = 0x00; PORTC = 0x00;
+    DDRA = 0x00; PORTA = 0x0F;
+    DDRC = 0xFF; PORTC = 0x00;
 
     while (1) {
     	
-	unsigned char tmpC = 0x00;
 	unsigned char button = ~PINA;
 	if(button == 0){
 		tmpC = 0x40;
 	}
 	else if(button == 1 || button ==  2){
-		tmpC = 0x60;
+		PORTC = 0x60;
 	}
 	else if(button == 3 || button == 4){
-		tmpC = 0x70;
+		PORTC = 0x70;
 	}
 	else if(button == 5 || button == 6){
-		tmpC = 0x38; 
+		PORTC = 0x38; 
 	}
 	else if(button >= 7 && button <= 9){
-		tmpC = 0x3C;
+		PORTC = 0x3C;
 	}
 	else if(button >= 10 && button <= 12){
-		tmpC = 0x3E;
+		PORTC = 0x3E;
 	}
 	else{
-		tmpC = 0x3F;
-	}
-		
-	PORTC = tmpC;	
+		PORTC = 0x3F;
+	}	
     }
     return 1;
 
