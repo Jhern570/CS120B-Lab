@@ -14,13 +14,12 @@
 int main(void) {
 
     DDRA = 0x00; PORTA = 0x0F;
-    DDRC = 0xFF; PORTC = 0x00;
+    DDRC = 0x00; PORTC = 0x00;
 
     while (1) {
     	
 	unsigned char tmpC = 0x00;
 	unsigned char button = ~PINA;
-	button = button & 0x04;
 	if(button == 0){
 		tmpC = 0x40;
 	}
