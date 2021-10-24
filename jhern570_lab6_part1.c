@@ -1,4 +1,4 @@
-/*	Author: Julio Hernandez 
+/*	Author: Julio Hernandez <jhern570@ucr.edu> 
  *	Lab Section: 023
  *	Assignment: Lab #6  Exercise # 1
  *      DEMO: https://youtu.be/tEI0_kZ8hxs
