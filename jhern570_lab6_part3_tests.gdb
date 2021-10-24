@@ -26,105 +26,57 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test "PINA: 0x00 => PORTC: 0x00"
+test "PINA: 0xFF => PORTB: 0x07"
 # Set inputs
-setPINA 0x00
-continue 5
+setPINA 0xFF
 # Set expect values
-expectPORTC 0x00
+expectPORTB 0x07
 # Check pass/fail
 checkResult
 
 # Example test:
-test "PINA: 0x01 => PORTC: 0x21"
+test "PINA: 0xFE => PORTB: 0x08"
 # Set inputs
-setPINA 0x01
-# Continue for several ticks
-continue 5
+setPINA 0xFE
 # Set expect values
-expectPORTC  0X21
+expectPORTB  0X08
 # Check pass/fail
 checkResult
 
-test "PINA: 0x01, 0X00=> PORTC: 0x21"
+test "PINA: 0xFD,=> PORTB: 0x06"
 # Set inputs
-setPINA 0x01
-setPINA 0x00
-# Continue for several ticks
-continue 5
+setPINA 0xFD
 # Set expect values
-expectPORTC 0x21
+expectPORTB 0x06
 # Check pass/fail
 checkResult
 
-test "PINA: 0x01, 0x00, 0x01, 0x00, 0x01 => PORTC: 0x0C"
+test "PINA: 0xFC => PORTB: 0x00"
 # Set inputs
-setPINA 0x01
-setPINA 0x00
-setPINA 0x01
-setPINA 0x00
-setPINA 0x01
-# Continue for several ticks
-continue 5
-# Set expect values
-expectPORTC 0x0C
-# Check pass/fail
-checkResult
-
-test "PINA: 0x08 => PORTB: 0x00, PORTC: firstPress"
-# Set inputs
-setPINA 0x08
-continue 2
+setPINA 0xFC
 # Set expect values
 expectPORTB 0x00
-expectPORTC firstPress
 # Check pass/fail
 checkResult
 
-test "PINA: 0x04, 0x00,  0x02 => PORTB: 0x01, PORTC = secondPress"
+test "PINA: 0xFE => PORTB: 0x09"
 # Set inputs
-setPINA 0x04
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
+setPINA 0xFE
+continue 2
 # Set expect values
-expectPORTB 0x01
-expectPORTC secondPress
+expectPORTB 0x09
 # Check pass/fail
 checkResult
 
-test "PINA: 0x04, 0x00, 0x02, 0x00, 0x08 => PORTB: 0x00, state: pressI"
+test "PINA: 0xFD => PORTB: 0x05"
 # Set inputs
-setPINA 0x04
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x02
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x08
+setPINA 0xFD
 continue 2
 # Set expect values
-expectPORTB 0x00
-expectPORTC pressI
+expectPORTB 0x05
 # Check pass/fail
 checkResult
 
-test "PINA: 0x04, 0x02 => PORTB: 0x00, PORTC: firstPress"
-# Set inputs
-setPINA 0x04
-# Continue for several ticks
-continue 5
-setPINA 0x02
-continue 5
-# Set expect values
-expectPORTB 0x00
-expectPORTC firstPress
-# Check pass/fail
-checkResult
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
